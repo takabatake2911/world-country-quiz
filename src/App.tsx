@@ -1,24 +1,31 @@
 import React, { useState } from 'react';
-import { Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import data from './data';
+import { Button } from 'react-bootstrap';
 import { getRandFourList } from './utilities';
+import data from './data';
+
+// 出題数
+const TOTAL_COUNT = 10;
 
 const App = () => {
     const [correctCount, setCorrectCount] = useState(0);
     const [wrongCount, setWrongCount] = useState(0);
-    const [quizNo, setQuizNo] = useState(0);
+    const [correctDataNo, setCorrectDataNo] = useState(
+        Math.floor(Math.random() * data.length)
+    );
 
     const judgeResult = (value: number) => {
         return () => {
-            if (value === quizNo) {
+            if (value === correctDataNo) {
                 alert('正解！');
                 setCorrectCount(correctCount + 1);
             } else {
-                alert(`ざんねん！正解は「${data[quizNo].capital}」でした`);
+                alert(
+                    `ざんねん！正解は「${data[correctDataNo].capital}」でした`
+                );
                 setWrongCount(wrongCount + 1);
             }
-            setQuizNo(Math.floor(Math.random() * data.length));
+            setCorrectDataNo(Math.floor(Math.random() * data.length));
         };
     };
 
@@ -27,14 +34,19 @@ const App = () => {
         setCorrectCount(0);
     };
 
+    // 現在何問目(0から始まる)かを取得;
+    const getQuizNo = () => {
+        return correctCount + wrongCount;
+    };
+
     return (
         <>
             <div className="container">
                 <h3 className="text-center m-3">
-                    正解数：{correctCount} / {correctCount + wrongCount}
+                    正解数：{correctCount} / {getQuizNo()}
                 </h3>
                 <hr />
-                {correctCount + wrongCount >= 5 ? (
+                {getQuizNo() >= TOTAL_COUNT ? (
                     <div className="text-center">
                         <h2 className="text-center m-3">
                             おつかれさまでした。
@@ -50,15 +62,15 @@ const App = () => {
                 ) : (
                     <>
                         <h3 className="text-center m-3">
-                            問題：{data[quizNo].name}の首都は？
+                            第{getQuizNo() + 1}問：{data[correctDataNo].name}
+                            の首都は？
                         </h3>
                         <hr />
-                        {getRandFourList(quizNo).map(
+                        {getRandFourList(correctDataNo).map(
                             (value: number, index: number) => {
                                 return (
-                                    <div className="row my-4">
+                                    <div key={index} className="row my-4">
                                         <Button
-                                            key={index}
                                             onClick={judgeResult(value)}
                                             className="col-md mx-auto"
                                             variant="outline-primary"
