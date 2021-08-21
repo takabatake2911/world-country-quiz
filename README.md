@@ -1,4 +1,4 @@
-Netlifyで公開しました。[Click to Play.](quizzical-pasteur-8dfbfe.netlify.app).
+Netlifyで公開しました。[Click to Play](quizzical-pasteur-8dfbfe.netlify.app)
 
 # Getting Started with Create React App
 
