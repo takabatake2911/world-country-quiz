@@ -43,7 +43,7 @@ const App = () => {
         <>
             <div className="container">
                 <h3 className="text-center m-3">
-                    正解数：{correctCount} / {getQuizNo()}
+                    正解数：{correctCount} / {getQuizNo()}（全{TOTAL_COUNT}問）
                 </h3>
                 <hr />
                 {getQuizNo() >= TOTAL_COUNT ? (

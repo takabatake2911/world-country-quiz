@@ -569,13 +569,6 @@ const data = [
     },
 
     {
-        name: 'バチカン',
-        capital: 'なし',
-        lang: 'ラテン語、フランス語、イタリア語',
-        money: 'ユーロ',
-    },
-
-    {
         name: 'ハンガリー',
         capital: 'ブダペスト',
         lang: 'ハンガリー語',
